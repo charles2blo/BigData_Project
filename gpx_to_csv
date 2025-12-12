@@ -1,0 +1,44 @@
+import groovy.xml.XmlSlurper
+import java.io.OutputStreamWriter
+import java.nio.charset.StandardCharsets
+import org.apache.nifi.processor.io.StreamCallback
+
+flowFile = session.get()
+if (!flowFile) return
+
+try {
+    // Convert content GPX -> CSV
+    flowFile = session.write(flowFile, { inputStream, outputStream ->
+        def xml = new XmlSlurper().parse(inputStream)
+        def writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8.name())
+
+        // header
+        writer.write("time,lat,lon,ele\n")
+
+        xml.'**'.findAll { it.name() == 'trkpt' }.each { trkpt ->
+            def lat = trkpt.@lat.toString()
+            def lon = trkpt.@lon.toString()
+            def ele = (trkpt.'ele'?.size() > 0) ? trkpt.ele.text().trim() : ""
+            def time = (trkpt.'time'?.size() > 0) ? trkpt.time.text().trim() : ""
+            writer.write("${time},${lat},${lon},${ele}\n")
+        }
+
+        writer.flush()
+    } as StreamCallback)
+
+    // change filename attribute so PutFile writes a .csv (keeps FlowFile identity)
+    def origName = flowFile.getAttribute('filename') ?: 'output.gpx'
+    def base = (origName.lastIndexOf('.') > 0) ? origName[0..(origName.lastIndexOf('.')-1)] : origName
+    def csvName = base + '.csv'
+    flowFile = session.putAttribute(flowFile, 'filename', csvName)
+
+    session.transfer(flowFile, REL_SUCCESS)
+} catch (Exception e) {
+    // log and route to failure
+    log.error("ExecuteScript GPX->CSV failed: " + e.toString(), e)
+    // if we have a FlowFile, route it to failure, otherwise create a provenance/log entry
+    if (flowFile != null) {
+        flowFile = session.putAttribute(flowFile, 'executeScript.error', e.toString())
+        session.transfer(flowFile, REL_FAILURE)
+    }
+}
