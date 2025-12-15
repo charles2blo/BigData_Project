@@ -69,7 +69,7 @@ This minimal example demonstrates how Apache NiFi can be used to build an **auto
 
 
 ## Screenshot proving execution
-Ypu can find a [`Screenshot`](./Flow NIFI executé.png) proving the execution went well.
+Ypu can find a [`Screenshot`](./Flow_NIFI_execute.png) proving the execution went well.
 
 ## Explanation of how this tool fits into a Big Data ecosystem
 
