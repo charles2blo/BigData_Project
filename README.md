@@ -28,7 +28,7 @@ Before starting, ensure the following are installed:
 - **Analytics Environment:** Python 3.13, Jupyter Notebook  
 ---
 ### 2. Docker Infrastructure Setup
-We created a dedicated project directory `Projet-Voile` and defined the infrastructure in a [`docker-compose.yml`](./docker-compose.yml) file.
+We created a dedicated project directory `Projet-Voile` and defined the infrastructure in a [`docker-compose.yml`](./Projet-Voile/docker-compose.yml) file.
 
 **Configuration Details:**
 
