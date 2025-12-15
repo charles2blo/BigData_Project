@@ -3,17 +3,17 @@
 
 
 ## Summary
-- [Folder structure](##folder-structure)
-- [Short description](##Short-description)
-- [The chosen tool](##the-chosen-tool)
-- [Why NIFI?](##why-nifi)
-- [High-level architecture](##high-level-architecture)
-- [Installation steps](##installation-steps)
-- [A minimal working example](##a-minimal-working-example)
-- [Proof of execution](##proof-of-execution)
-- [How Apache NiFi Fits into a Big Data Ecosystem](##how-apache-nifi-fits-into-a-big-data-ecosystem)
-- [Challenges encountered and how we solved them](##challenges-encountered-and-how-we-solved-them)
-- [Our Setup Notes](##our-setup-notes)
+- [Folder structure](#folder-structure)
+- [Short description](#Short-description)
+- [The chosen tool](#the-chosen-tool)
+- [Why NIFI?](#why-nifi)
+- [High-level architecture](#high-level-architecture)
+- [Installation steps](#installation-steps)
+- [A minimal working example](#a-minimal-working-example)
+- [Proof of execution](#proof-of-execution)
+- [How Apache NiFi Fits into a Big Data Ecosystem](#how-apache-nifi-fits-into-a-big-data-ecosystem)
+- [Challenges encountered and how we solved them](#challenges-encountered-and-how-we-solved-them)
+- [Our Setup Notes](#our-setup-notes)
 - [How to Run the Visualization (Python)](#how-to-run-the-visualization-python)
 
 
