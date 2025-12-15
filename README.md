@@ -150,14 +150,47 @@ Overall, Apache NiFi provides a robust, transparent, and scalable foundation for
 
 ## Challenges encountered and how we solved them
 ### Challenge 1: Docker Container Name Conflicts
-Issue: Docker keeps stopped containers in cache. Trying to run (`docker-compose up`) resulted in: (`Conflict. The container name "/nifi-ece-2025" is already in use`).
-Solution: We implemented a strict cleanup routine before launching:  
+**Issue:** Docker keeps stopped containers in cache. Trying to run (`docker-compose up`) resulted in: (`Conflict. The container name "/nifi-ece-2025" is already in use`).
+**Solution:** We implemented a strict cleanup routine before launching:  
 ```
 docker rm -f nifi-ece-2025
 docker compose up -d
 ```
+## Challenge 2: Learn Groovy programming langage for ExecuteScript
+We first planned to create a python code which could not fit with the ExecuteScript processor, so with the help of Chat GPT, we managed to tranform our python code into a Groovy code. 
+## Challenge 3: Visualization Color Formats
+**Issue:** When visualizing speed in Python, the map would not render.
+**Analysis:** The `matplotlib` library generates colors in RGBA tuples (e.g., `(0.1, 0.5, 1.0, 1.0)`), but the `folium` mapping library requires HEX strings (e.g., `#1A85FF`).
+**Solution:** We added a conversion step in the Python notebook using `matplotlib.colors.to_hex()`.
 
 
 ## Our Setup Notes 
+**Specific problem solving process regarding Data Parsing Robustness**
+One specific technical hurdle we struggled with was handling "dirty" data in the GPX files. Some track points recorded by the watch lacked an elevation (`<ele>`) tag.
+**Initial Failure:**  
+The initial Groovy script failed with `NullPointerException` whenever it encountered a point without elevation, stopping the entire pipeline.
+**The Fix:**  
+We had to learn how to write "defensive" code in Groovy for NiFi. We modified the script to check for the existence of the tag before accessing it.
+**Code Snippet (Before):**  
+```groovy
+// Caused crashing
+def ele = trkpt.ele.text()
+```
+**Code Snippet (After):**
+```groovy
+// Checks size > 0. If empty, returns empty string ""
+def ele = (trkpt.'ele'?.size() > 0) ? trkpt.ele.text().trim() : ""
+```
+This ensured that even if the GPS signal was degraded and missed metadata, the CSV row would still be generated (with a blank value), preserving the rest of the valuable data.
 
-
+## How to Run the Visualization (Python)
+1. **Ensure Python 3.13 is installed.**
+2. **Install dependencies:**  
+```bash
+pip install pandas folium matplotlib jupyter
+```
+3. **Open the notebook:**
+```bash
+jupyter notebook Analyse_CSV.ipynb
+```
+4. **Run all cells to generate the interactive map.**
