@@ -57,8 +57,13 @@ We created a dedicated project directory `Projet-Voile` and defined the infrastr
 **Command used to launch the container:**
 bash
 docker compose up -d
-Note: Your browser may show a security warning due to a self-signed certificate; you can safely proceed.
---
+Note: Your browser may show a security warning due to a self-signed certificate; you can safely proceed.  
+Command used to launch:
+```
+Bash
+docker compose up -d
+```
+---
 ### 3. Verification
 After approximately 2 minutes, the NiFi UI should be accessible at:
 https://localhost:8443/nifi  
