@@ -4,7 +4,7 @@
 
 ## Summary
 - [Folder structure](##folder-structure)
-- [Short description](##short-description)
+- [Short description](##Short-description)
 - [The chosen tool](##the-chosen-tool)
 - [Why NIFI?](##why-nifi)
 - [High-level architecture](##high-level-architecture)
