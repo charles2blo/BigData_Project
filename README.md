@@ -28,21 +28,48 @@ Before starting, ensure the following are installed:
 - **Analytics Environment:** Python 3.13, Jupyter Notebook  
 ---
 ### 2. Docker Infrastructure Setup
-We created a dedicated project directory `Projet-Voile` and defined the infrastructure in a [`docker-compose.yml`](./Projet-Voile/docker-compose.yml) file.
-**Configuration Details:**
+We created a dedicated project directory `Projet-Voile` and defined the infrastructure in a [`docker-compose.yml`](./Projet-Voile/docker-compose.yml) file.  
 - **Service Name:** `nifi-ece-2025`  
 - **Port Mapping:** Host port `8443` → Container port `8443` (HTTPS)  
 - **Authentication:** Single-user credentials configured via environment variables  
 - **Volume Mapping:** Local directories mounted to the container to allow file exchange (critical for ETL)
 **Command used to launch the container:**
-```bash
+bash
 docker compose up -d
+Note: Your browser may show a security warning due to a self-signed certificate; you can safely proceed.
+--
+### 3. Verification
+After approximately 2 minutes, the NiFi UI should be accessible at:
+https://localhost:8443/nifi  
+**Username:** CHARLO  
+**Password:** AZERTYUIOPQS  
+
 
 ## A minimal working example 
+Our **"Hello World"** for this Big Data tool is a fully functional NiFi dataflow that automatically converts a sailing track recorded in **GPX format** into a structured **CSV dataset**, ready for analytics.
+
+### The NiFi Flow
+
+The pipeline consists of **three processors connected sequentially**, forming a simple yet complete ETL workflow:
+
+#### 1. GetFile – Data Ingestion
+
+#### 2. ExecuteScript – Data Transformation
+
+#### 3. PutFile – Data Output
+
+### Result
+Once the flow is started:
+- Dropping a `.gpx` file into `gpx_input/`
+- Automatically produces a corresponding `.csv` file in `gpx_output/`
+- No manual intervention is required
+
+This minimal example demonstrates how Apache NiFi can be used to build an **automated, scalable, and reproducible data ingestion pipeline**.
 
 
-## Screenshots or logs proving execution
 
+## Screenshot proving execution
+Ypu can find a [`Screenshot`](./Projet-Voile/docker-compose.yml) proving the execution went well.
 
 ## Explanation of how this tool fits into a Big Data ecosystem
 
