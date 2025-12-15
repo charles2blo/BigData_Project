@@ -4,7 +4,7 @@
 ## Folder structure
 Below is the structure of the GitHub repository.
 ```
-│Projet-Voile/
+├─ Projet-Voile/
 │       │
 │       ├─ docker-compose.yml                # Defines the NiFi service, ports, and volumes
 │       ├─ gpx_input/                        # raw GPX files
