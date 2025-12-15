@@ -95,8 +95,8 @@ This screenshot confirms that the data pipeline was successfully executed:
 - **PutFile** has written all transformed data to disk, confirming that the ETL process completed successfully end-to-end.
 - All queues between processors are empty (`Queued 0`), indicating that the flow has fully finished processing and no data is stuck in transit.
 As a result, the following CSV files were successfully generated in the output directory:
-- [`activity_16613729286.csv`](./gpx_output/activity_16613729286.csv)
-- [`activity_20110577449.csv`](./gpx_output/activity_20110577449.csv)
+- [`activity_16613729286.csv`](.Projet-Voile/gpx_output/activity_16613729286.csv)
+- [`activity_20110577449.csv`](.Projet-Voile/gpx_output/activity_20110577449.csv)
 
 
 ## Explanation of how this tool fits into a Big Data ecosystem
