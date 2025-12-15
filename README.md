@@ -149,6 +149,13 @@ Overall, Apache NiFi provides a robust, transparent, and scalable foundation for
 
 
 ## Challenges encountered and how we solved them
+### Challenge 1: Docker Container Name Conflicts
+Issue: Docker keeps stopped containers in cache. Trying to run (`docker-compose up`) resulted in: (`Conflict. The container name "/nifi-ece-2025" is already in use`).
+Solution: We implemented a strict cleanup routine before launching:  
+```
+docker rm -f nifi-ece-2025
+docker compose up -d
+```
 
 
 ## Our Setup Notes 
