@@ -50,26 +50,45 @@ Our **"Hello World"** for this Big Data tool is a fully functional NiFi dataflow
 
 ### The NiFi Flow
 
-The pipeline consists of **three processors connected sequentially**, forming a simple yet complete ETL workflow:
+The pipeline consists of three processors connected sequentially, forming a simple yet complete ETL workflow:
 
 #### 1. GetFile – Data Ingestion
-
+The GetFile processor continuously monitors a specified directory inside the container (`/gpx_input`) and creates a FlowFile for each detected `.gpx` file.  
+Its main configuration ensures automated ingestion of new GPX files without deleting the original source files.
+**Key settings:**
+- `Input Directory`: [`gpx_input`](./Projet-Voile/gpx_input)
+- `Keep Source File`: `true`
+- `File Filter`: `.*\.gpx`
+- Relationships:
+  - `success` → connected to `ExecuteScript`
+---
 #### 2. ExecuteScript – Data Transformation
-
+The ExecuteScript processor performs the core ETL transformation by parsing the GPX XML content using a Groovy script.  
+It extracts latitude, longitude, elevation, and timestamp from each track point and converts the hierarchical XML structure into a flat CSV-compatible format.
+**Key settings:**
+- `Script Engine`: `Groovy`
+- `Script File`: [`gpx_to_csv`](./gpx_to_csv)
+- Relationships:
+  - `success` → connected to `PutFile`
+  - `failure` → auto-terminated
+---
 #### 3. PutFile – Data Output
-
+The PutFile processor writes the transformed data to disk as CSV files in the output directory (`/gpx_output`).  
+Each processed GPX file generates a corresponding CSV file, making the data immediately available for analysis.
+**Key settings:**
+- `Directory`: [`gpx_output`](./Projet-Voile/gpx_output)
+- `Conflict Resolution Strategy`: `replace`
+- `Create Missing Directories`: `true`
 ### Result
 Once the flow is started:
 - Dropping a `.gpx` file into `gpx_input/`
 - Automatically produces a corresponding `.csv` file in `gpx_output/`
 - No manual intervention is required
-
 This minimal example demonstrates how Apache NiFi can be used to build an **automated, scalable, and reproducible data ingestion pipeline**.
 
 
-
 ## Screenshot proving execution
-Ypu can find a [`Screenshot`](./Flow_NIFI_execute.png) proving the execution went well.
+You can find a [`Screenshot`](./Flow_NIFI_execute.png) proving the execution went well.
 
 ## Explanation of how this tool fits into a Big Data ecosystem
 
