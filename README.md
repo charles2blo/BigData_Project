@@ -29,14 +29,11 @@ Before starting, ensure the following are installed:
 ---
 ### 2. Docker Infrastructure Setup
 We created a dedicated project directory `Projet-Voile` and defined the infrastructure in a [`docker-compose.yml`](./Projet-Voile/docker-compose.yml) file.
-
 **Configuration Details:**
-
 - **Service Name:** `nifi-ece-2025`  
 - **Port Mapping:** Host port `8443` → Container port `8443` (HTTPS)  
 - **Authentication:** Single-user credentials configured via environment variables  
 - **Volume Mapping:** Local directories mounted to the container to allow file exchange (critical for ETL)
-
 **Command used to launch the container:**
 ```bash
 docker compose up -d
