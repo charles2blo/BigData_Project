@@ -1,6 +1,22 @@
 # BigData_Project: Sailing Data Pipeline – From GPX to Insights
 **Autors:** Hugo BASSAGET & Charles DE BLAUWE
 
+
+## Summary
+- [Folder structure](##folder-structure)
+- [Short description](##short-description)
+- [The chosen tool](##the-chosen-tool)
+- [Why NIFI?](##why-nifi)
+- [High-level architecture](##high-level-architecture)
+- [Installation steps](##installation-steps)
+- [A minimal working example](##a-minimal-working-example)
+- [Proof of execution](##proof-of-execution)
+- [How Apache NiFi Fits into a Big Data Ecosystem](##how-apache-nifi-fits-into-a-big-data-ecosystem)
+- [Challenges encountered and how we solved them](##challenges-encountered-and-how-we-solved-them)
+- [Our Setup Notes](##our-setup-notes)
+- [How to Run the Visualization (Python)](#how-to-run-the-visualization-python)
+
+
 ## Folder structure
 Below is the structure of the GitHub repository.
 ```
@@ -22,6 +38,7 @@ Below is the structure of the GitHub repository.
 ├─ gpx_to_csv                                # Groovy code used in ExecuteScript
 ├─ README.md
 ```
+
 
 ## Short description
 This project demonstrates an end-to-end data pipeline designed to process, transform, and visualize GPS telemetry data collected from a Garmin watch during a sailing trip.   
