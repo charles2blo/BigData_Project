@@ -20,6 +20,27 @@ We selected Apache NiFi for this project due to its specific suitability for IoT
 - **Docker Integration:** NiFi allows for a clean, portable installation that does not clutter the local OS, which is crucial for reproducibility in academic projects.
 
 
+## High-Level Architecture
+The following diagram illustrates the global architecture of the project and the role played by Apache NiFi in the data pipeline:
+
+```text
+[ Garmin Watch ]
+       |
+       v
+[ Raw GPX Files ]
+       |
+       v
+[ Apache NiFi ]
+ (Ingestion & ETL)
+       |
+       v
+[ Structured CSV ]
+       |
+       v
+[ Python Analytics ]
+(Folium, Matplotlib, Jupyter)
+```
+
 ## Installation steps
 ### 1. Prerequisites
 Before starting, ensure the following are installed:
@@ -102,12 +123,29 @@ As a result, the following CSV files were successfully generated in the output d
 - [`activity_20110577449.csv`](./Projet-Voile/gpx_output/activity_20110577449.csv)
 
 
-## Explanation of how this tool fits into a Big Data ecosystem
+## How Apache NiFi Fits into a Big Data Ecosystem
+Apache NiFi acts as the ingestion and routing layer in a modern Big Data or Data Lake architecture. Its primary role is to reliably collect, transform, and route data from diverse sources to downstream processing systems.
+### Data Acquisition
+In a real-world scenario, sailing boats (or IoT devices in general) continuously generate telemetry data such as GPS positions, speed, or sensor measurements. These data streams are often transmitted using lightweight protocols like **MQTT**, **UDP**, or **HTTP**.  
+Apache NiFi can ingest these data streams in real time, acting as the *front door* of the data platform.
+### ETL Offloading
+NiFi is particularly well suited for handling the early stages of data processing:
+- Parsing unstructured or semi-structured formats (e.g., GPX, XML, JSON)
+- Cleaning and validating incoming data
+- Converting raw data into structured formats such as CSV or JSON
+By handling the "dirty work" of parsing XML/GPX into CSV/JSON, NiFi prepares clean data for downstream processing engines like Apache Spark (for machine learning) or Kafka (for real-time streaming).  
+### Data Provenance and Governance
+One of NiFi’s key strengths in a Big Data context is data provenance. NiFi automatically tracks the lineage of every FlowFile:
+- Source file
+- Applied transformations
+- Destination  
+This capability is essential for data governance, debugging, and auditability.
+Overall, Apache NiFi provides a robust, transparent, and scalable foundation for building reliable Big Data pipelines.
 
 
 ## Challenges encountered and how we solved them
 
 
-## My Setup Notes 
+## Our Setup Notes 
 
 
