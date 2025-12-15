@@ -87,8 +87,17 @@ Once the flow is started:
 This minimal example demonstrates how Apache NiFi can be used to build an **automated, scalable, and reproducible data ingestion pipeline**.
 
 
-## Screenshot proving execution
-You can find a [`Screenshot`](./Flow_NIFI_execute.png) proving the execution went well.
+## Proof of execution
+You can find a [`Screenshot`](./Flow_NIFI_execute.png) proving the execution went well.  
+This screenshot confirms that the data pipeline was successfully executed:
+- **GetFile** has ingested the GPX files from the input directory, as shown by the high number of processed tasks and the total volume of data read.
+- **ExecuteScript** has correctly transformed each GPX track point into CSV rows, producing 619 FlowFiles without errors.
+- **PutFile** has written all transformed data to disk, confirming that the ETL process completed successfully end-to-end.
+- All queues between processors are empty (`Queued 0`), indicating that the flow has fully finished processing and no data is stuck in transit.
+As a result, the following CSV files were successfully generated in the output directory:
+- [`activity_16613729286.csv`](./gpx_output/activity_16613729286.csv)
+- [`activity_20110577449.csv`](./gpx_output/activity_20110577449.csv)
+
 
 ## Explanation of how this tool fits into a Big Data ecosystem
 
